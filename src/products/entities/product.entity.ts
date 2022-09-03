@@ -9,27 +9,22 @@ export class Product {
   @Column('text', { unique: true })
   title: string;
  
-  @Column({
-    type:"varchar", length:150
-  })
-  Add: string
-  
   @Column({type:"varchar",nullable:true, length:25})
   description:string
   
   @Column({type:"int" })
   existence:number
 
-  @Column({type:"varchar",nullable:false, length:4})
-  sizes: string
+  @Column({type:"varchar", array:true})
+  sizes: string[]
 
   @Column({
-    type:"varchar", length:12
+    type:"text", array:true
   })
-  gender: string
+  gender: string[]
 
   @Column({
-    type: "int"
+    type: "float"
   })
   price: number
 

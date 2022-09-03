@@ -7,6 +7,13 @@ import { Product } from './entities/product.entity';
 
 @Injectable()
 export class ProductsService {
+
+  constructor(
+    @InjectRepository(Product)
+    private readonly productRepository: Repository<Product>,
+  ) {}
+
+
   findAll() {
     return `This action returns all products`;
   }
@@ -22,11 +29,6 @@ export class ProductsService {
   remove(id: number) {
     return `This action removes a #${id} product`;
   }
-
-  constructor(
-    @InjectRepository(Product)
-    private readonly productRepository: Repository<Product>,
-  ) {}
 
   async create(createProductDto: CreateProductDto) {
     try {

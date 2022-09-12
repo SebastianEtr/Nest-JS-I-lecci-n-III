@@ -16,6 +16,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/user/entities/user.entity';
 import { Repository } from 'typeorm';
 import { LoginAuthDto } from './dto/login-auth.dto';
+import { JwtService } from '@nestjs/jwt';
+import { JwtPayload } from './interfaces/jwt-payload.interface';
 
 
 @Injectable()
@@ -23,7 +25,7 @@ export class AuthService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-    /*private readonly jwtService: JwtService,*/
+    private readonly jwtService: JwtService,
   ) {}
 
 private readonly logger = new Logger('ProductsService');
@@ -39,12 +41,12 @@ async createAuth(createUserDto: CreateUserDto) {
 
     await this.userRepository.save(user);
     delete user.password;
-    /*
+    
     return {
       ...user,
       token: this.getJwtToken({ email: user.email }),
     };
-    */
+    
   } catch (error) {
     if (error.code === '23505')
       throw new HttpException(
@@ -70,7 +72,7 @@ async loginAuth(loginUserDto: LoginAuthDto) {
   if (!bcrypt.compareSync(password, user.password))
     throw new UnauthorizedException(MessageHandler.UNAUTHORIZED_CREDENTIALS);
   delete user.password;
-  /*
+  
   return {
     ...user,
     token: this.getJwtToken({ email: user.email }),
@@ -80,5 +82,5 @@ async loginAuth(loginUserDto: LoginAuthDto) {
 private getJwtToken(payload: JwtPayload) {
   return this.jwtService.sign(payload);
 }
-*/
-}}
+
+}

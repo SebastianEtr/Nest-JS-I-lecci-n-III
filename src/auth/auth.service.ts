@@ -44,7 +44,7 @@ async createAuth(createUserDto: CreateUserDto) {
     
     return {
       ...user,
-      token: this.getJwtToken({ email: user.email }),
+      token: this.getJwtToken({ id: user.email }),
     };
     
   } catch (error) {
@@ -75,7 +75,7 @@ async loginAuth(loginUserDto: LoginAuthDto) {
   
   return {
     ...user,
-    token: this.getJwtToken({ email: user.email }),
+    token: this.getJwtToken({ id: user.email }),
   };
 }
 

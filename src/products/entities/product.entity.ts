@@ -1,5 +1,6 @@
 import { type } from 'os';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from 'src/user/entities/user.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Product {
@@ -27,5 +28,11 @@ export class Product {
     type: "float"
   })
   price: number
+
+
+
+  @ManyToOne(() => User, (user) => user.product, { eager: true })
+  user: User;
+
 
 }

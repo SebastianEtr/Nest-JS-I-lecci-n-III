@@ -3,6 +3,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductsModule } from './products/products.module';
+import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -41,6 +43,8 @@ import { ProductsModule } from './products/products.module';
       }),
     }),
     ProductsModule,
+    UserModule,
+    AuthModule,
   ],
  
 })
